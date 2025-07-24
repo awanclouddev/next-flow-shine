@@ -1,4 +1,4 @@
-import { Root, Action, Close, Description, Title, Viewport } from "@radix-ui/react-toast"
+import { Root, Action, Close, Description, Title, Viewport, Provider } from "@radix-ui/react-toast"
 import { cva } from "class-variance-authority"
 import { X } from "lucide-react"
 import { forwardRef } from "react"
