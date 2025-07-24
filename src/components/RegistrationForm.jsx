@@ -123,13 +123,12 @@ const RegistrationForm = () => {
               </div>
               
               {/* Right Image */}
-              <div className="relative">
+              <div className="relative p-4">
                 <img 
-                  src="/lovable-uploads/35d9bc97-b1e8-4445-9bbb-081da955115b.png"
-                  alt="IPExpose 2025 Event Audience"
-                  className="w-full h-full object-cover min-h-[300px] rounded-r-lg"
+                  src="/lovable-uploads/0426bef6-037c-4867-b452-76edf75402e0.png"
+                  alt="IPExpose Indonesia 2025 Event"
+                  className="w-full h-full object-cover min-h-[300px] rounded-lg"
                 />
-                <div className="absolute inset-0 bg-gradient-to-l from-transparent to-primary/10 rounded-r-lg"></div>
               </div>
             </div>
           </CardContent>
