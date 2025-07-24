@@ -71,9 +71,13 @@ const RegistrationForm = () => {
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-2">
-            IPExpose 2025
-          </h1>
+          <div className="flex justify-center mb-2">
+            <img 
+              src="/lovable-uploads/2a9754aa-9a18-46dd-b388-ad079832413e.png" 
+              alt="IPExpose Indonesia Logo" 
+              className="h-16 md:h-20 w-auto object-contain"
+            />
+          </div>
           <p className="text-xl text-muted-foreground mb-4">
             Indonesia's Premier Technology Expo
           </p>
