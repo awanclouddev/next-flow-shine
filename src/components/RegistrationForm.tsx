@@ -94,44 +94,91 @@ const RegistrationForm = () => {
         </div>
 
         {/* Event Details Card */}
-        <Card className="mb-8 border-primary/20">
-          <CardHeader className="bg-primary text-primary-foreground">
-            <CardTitle className="text-2xl">Detail Event</CardTitle>
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-foreground">Detail Event</CardTitle>
           </CardHeader>
-          <CardContent className="p-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <Calendar className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="font-semibold">Tanggal</p>
-                    <p className="text-muted-foreground">13-16 Agustus 2025</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="font-semibold">Lokasi</p>
-                    <p className="text-muted-foreground">Jakarta Convention Center</p>
-                    <p className="text-sm text-muted-foreground">Gelora Bung Karno, Jakarta</p>
-                  </div>
+          <CardContent className="p-6 space-y-6">
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <Calendar className="h-5 w-5 text-primary mt-0.5" />
+                <div>
+                  <p className="font-semibold text-foreground text-lg">Tanggal</p>
+                  <p className="text-muted-foreground">13-16 Agustus 2025</p>
                 </div>
               </div>
-              <div className="space-y-4">
+              
+              <div className="flex items-start gap-3">
+                <div className="bg-primary rounded-full p-1 mt-0.5">
+                  <div className="w-3 h-3 bg-white rounded-full"></div>
+                </div>
+                <div>
+                  <p className="font-semibold text-foreground text-lg">Waktu</p>
+                  <p className="text-muted-foreground">09:00 - 17:00 WIB</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <MapPin className="h-5 w-5 text-primary mt-0.5" />
+                <div>
+                  <p className="font-semibold text-foreground text-lg">Lokasi</p>
+                  <p className="text-muted-foreground">Jakarta Convention Center</p>
+                  <p className="text-muted-foreground">Gelora Bung Karno, Jakarta</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Tag className="h-5 w-5 text-primary mt-0.5" />
+                <div>
+                  <p className="font-semibold text-foreground text-lg">Tiket</p>
+                  <p className="text-green-600 font-semibold text-lg">GRATIS</p>
+                </div>
+              </div>
+            </div>
+
+            <Separator className="my-6" />
+
+            {/* Facilities */}
+            <div>
+              <h3 className="text-xl font-bold text-foreground mb-4">Fasilitas Event</h3>
+              <div className="space-y-3">
                 <div className="flex items-center gap-3">
-                  <Tag className="h-5 w-5 text-green-600" />
-                  <div>
-                    <p className="font-semibold">Tiket</p>
-                    <p className="text-green-600 font-semibold text-lg">GRATIS</p>
+                  <div className="w-5 h-5 rounded bg-green-100 flex items-center justify-center">
+                    <span className="text-green-600 text-sm font-bold">✓</span>
                   </div>
+                  <span className="text-muted-foreground">Sertifikat kehadiran</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Users className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="font-semibold">Pendaftar</p>
-                    <p className="text-muted-foreground">4,237 orang telah mendaftar</p>
+                  <div className="w-5 h-5 rounded bg-green-100 flex items-center justify-center">
+                    <span className="text-green-600 text-sm font-bold">✓</span>
                   </div>
+                  <span className="text-muted-foreground">Networking session</span>
                 </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-5 h-5 rounded bg-green-100 flex items-center justify-center">
+                    <span className="text-green-600 text-sm font-bold">✓</span>
+                  </div>
+                  <span className="text-muted-foreground">Goodie bag eksklusif</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-5 h-5 rounded bg-green-100 flex items-center justify-center">
+                    <span className="text-green-600 text-sm font-bold">✓</span>
+                  </div>
+                  <span className="text-muted-foreground">Akses ke semua workshop</span>
+                </div>
+              </div>
+            </div>
+
+            <Separator className="my-6" />
+
+            {/* Registration Count */}
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-yellow-100 rounded-full mb-3">
+                <Users className="h-6 w-6 text-yellow-600" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-foreground">4,237 orang</p>
+                <p className="text-muted-foreground">telah mendaftar</p>
               </div>
             </div>
           </CardContent>
@@ -366,32 +413,6 @@ const RegistrationForm = () => {
           </CardContent>
         </Card>
 
-        {/* Facilities */}
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle>Fasilitas Event</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="flex items-center gap-2 text-green-600">
-                <span className="text-lg">✓</span>
-                <span>Sertifikat kehadiran</span>
-              </div>
-              <div className="flex items-center gap-2 text-green-600">
-                <span className="text-lg">✓</span>
-                <span>Networking session</span>
-              </div>
-              <div className="flex items-center gap-2 text-green-600">
-                <span className="text-lg">✓</span>
-                <span>Goodie bag eksklusif</span>
-              </div>
-              <div className="flex items-center gap-2 text-green-600">
-                <span className="text-lg">✓</span>
-                <span>Akses ke semua workshop</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );
