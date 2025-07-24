@@ -1,4 +1,4 @@
-import { Root, Trigger, Value, Icon, Portal, Content, Viewport, Item, ItemText, ItemIndicator, ScrollUpButton, ScrollDownButton } from "@radix-ui/react-select"
+import { Root, Trigger, Value, Icon, Portal, Content, Viewport, Item, ItemText, ItemIndicator, ScrollUpButton, ScrollDownButton, Label, Separator } from "@radix-ui/react-select"
 import { Check, ChevronDown, ChevronUp } from "lucide-react"
 import { forwardRef } from "react"
 
