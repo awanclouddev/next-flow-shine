@@ -88,10 +88,58 @@ const RegistrationForm = () => {
             Indonesia's Premier Technology Expo
           </p>
           <div className="flex items-center justify-center gap-2 text-lg text-muted-foreground">
-            <Calendar className="h-5 w-5" />
+            <div className="bg-yellow-100 p-1 rounded">
+              <Calendar className="h-5 w-5 text-yellow-600" />
+            </div>
             <span>13-16 Agustus 2025 | Jakarta Convention Center</span>
           </div>
         </div>
+
+        {/* Hero Card */}
+        <Card className="mb-8 bg-primary text-primary-foreground overflow-hidden">
+          <CardContent className="p-0">
+            <div className="grid md:grid-cols-2 gap-0">
+              {/* Left Content */}
+              <div className="p-8 space-y-6">
+                <div>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+                    Bergabunglah dengan IPExpose 2025!
+                  </h2>
+                  <p className="text-lg text-primary-foreground/90 leading-relaxed">
+                    Event teknologi terbesar Indonesia yang mempertemukan ribuan profesional, startup, dan inovator teknologi.
+                  </p>
+                </div>
+                
+                <div className="flex items-center gap-8">
+                  <div className="flex items-center gap-3">
+                    <Users className="h-6 w-6" />
+                    <div>
+                      <p className="text-xl font-bold">5000+</p>
+                      <p className="text-sm text-primary-foreground/80">Peserta</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Building className="h-6 w-6" />
+                    <div>
+                      <p className="text-xl font-bold">100+</p>
+                      <p className="text-sm text-primary-foreground/80">Exhibitor</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Right Image */}
+              <div className="relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=600&h=400&fit=crop&crop=center"
+                  alt="IPExpose 2025 Event"
+                  className="w-full h-full object-cover min-h-[300px]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-l from-transparent to-primary/20"></div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Event Details Card */}
         <Card className="mb-8">
