@@ -422,25 +422,26 @@ const RegistrationForm = () => {
               {/* Event Attendance */}
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-lg font-semibold">Pilih Hari Kehadiran</h3>
+                  <h3 className="text-lg font-semibold">Pilih Hari Kehadiran <span className="text-red-500">*</span></h3>
                   <p className="text-sm text-muted-foreground">
                     Anda dapat memilih lebih dari satu hari
                   </p>
                 </div>
                 
-                <div className="grid gap-3">
+                <div className="grid grid-cols-2 gap-4">
                   {eventDays.map((day) => (
-                    <div key={day.value} className="flex items-center space-x-3 border rounded-lg p-4 hover:bg-muted/50">
+                    <div key={day.value} className="flex items-start space-x-3 border rounded-lg p-4 hover:bg-muted/50">
                       <Checkbox
                         id={day.value}
                         checked={attendanceDays.includes(day.value)}
                         onCheckedChange={(checked) => handleDayChange(day.value, checked as boolean)}
+                        className="mt-0.5"
                       />
                       <div className="flex-1">
-                        <Label htmlFor={day.value} className="font-medium cursor-pointer">
+                        <Label htmlFor={day.value} className="font-medium cursor-pointer text-sm">
                           {day.date}
                         </Label>
-                        <p className="text-sm text-muted-foreground">{day.description}</p>
+                        <p className="text-xs text-muted-foreground mt-1">{day.description}</p>
                       </div>
                     </div>
                   ))}
