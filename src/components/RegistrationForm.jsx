@@ -11,19 +11,8 @@ import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
 import { User, Phone, Mail, MapPin, GraduationCap, Building, Calendar, Users, Tag } from 'lucide-react';
 
-interface FormData {
-  fullName: string;
-  gender: 'male' | 'female';
-  phoneNumber: string;
-  email: string;
-  city: string;
-  education: string;
-  institution: string;
-  attendanceDays: string[];
-}
-
 const RegistrationForm = () => {
-  const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<FormData>();
+  const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm();
   const { toast } = useToast();
   const attendanceDays = watch('attendanceDays') || [];
 
@@ -59,7 +48,7 @@ const RegistrationForm = () => {
     }
   ];
 
-  const handleDayChange = (dayValue: string, checked: boolean) => {
+  const handleDayChange = (dayValue, checked) => {
     const currentDays = attendanceDays || [];
     if (checked) {
       setValue('attendanceDays', [...currentDays, dayValue]);
@@ -68,7 +57,7 @@ const RegistrationForm = () => {
     }
   };
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data) => {
     console.log('Form submitted:', data);
     toast({
       title: "Registrasi Berhasil!",
@@ -278,7 +267,7 @@ const RegistrationForm = () => {
                     Jenis Kelamin <span className="text-red-500">*</span>
                   </Label>
                   <RadioGroup
-                    onValueChange={(value) => setValue('gender', value as 'male' | 'female')}
+                    onValueChange={(value) => setValue('gender', value)}
                     className="grid grid-cols-2 gap-4"
                   >
                     <div className="flex items-center space-x-2 border rounded-lg p-3 hover:bg-muted/50">
@@ -434,7 +423,7 @@ const RegistrationForm = () => {
                       <Checkbox
                         id={day.value}
                         checked={attendanceDays.includes(day.value)}
-                        onCheckedChange={(checked) => handleDayChange(day.value, checked as boolean)}
+                        onCheckedChange={(checked) => handleDayChange(day.value, checked)}
                         className="mt-0.5"
                       />
                       <div className="flex-1">
