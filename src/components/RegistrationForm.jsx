@@ -123,7 +123,7 @@ const RegistrationForm = () => {
               </div>
               
               {/* Right Image */}
-              <div className="relative p-4">
+              <div className="relative p-8">
                 <img 
                   src="/lovable-uploads/0426bef6-037c-4867-b452-76edf75402e0.png"
                   alt="IPExpose Indonesia 2025 Event"
