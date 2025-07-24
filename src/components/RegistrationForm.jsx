@@ -71,9 +71,13 @@ const RegistrationForm = () => {
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-2">
-            IPExpose 2025
-          </h1>
+          <div className="flex justify-center mb-2">
+            <img 
+              src="/lovable-uploads/2a9754aa-9a18-46dd-b388-ad079832413e.png" 
+              alt="IPExpose Indonesia Logo" 
+              className="h-16 md:h-20 w-auto object-contain"
+            />
+          </div>
           <p className="text-xl text-muted-foreground mb-4">
             Indonesia's Premier Technology Expo
           </p>
@@ -121,11 +125,11 @@ const RegistrationForm = () => {
               {/* Right Image */}
               <div className="relative">
                 <img 
-                  src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=600&h=400&fit=crop&crop=center"
-                  alt="IPExpose 2025 Event"
-                  className="w-full h-full object-cover min-h-[300px]"
+                  src="/lovable-uploads/35d9bc97-b1e8-4445-9bbb-081da955115b.png"
+                  alt="IPExpose 2025 Event Audience"
+                  className="w-full h-full object-cover min-h-[300px] rounded-r-lg"
                 />
-                <div className="absolute inset-0 bg-gradient-to-l from-transparent to-primary/20"></div>
+                <div className="absolute inset-0 bg-gradient-to-l from-transparent to-primary/10 rounded-r-lg"></div>
               </div>
             </div>
           </CardContent>
