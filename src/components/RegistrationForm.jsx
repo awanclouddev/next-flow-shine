@@ -49,12 +49,12 @@ const RegistrationForm = () => {
     }
   ];
 
-  const handleDayChange = (dayValue, checked) => {
+  const handleDayChange = (dayObject, checked) => {
     const currentDays = attendanceDays || [];
     if (checked) {
-      setValue('attendanceDays', [...currentDays, dayValue]);
+      setValue('attendanceDays', [...currentDays, dayObject]);
     } else {
-      setValue('attendanceDays', currentDays.filter(day => day !== dayValue));
+      setValue('attendanceDays', currentDays.filter(day => day.value !== dayObject.value));
     }
   };
 
@@ -426,8 +426,8 @@ const RegistrationForm = () => {
                     <div key={day.value} className="flex items-start space-x-3 border rounded-lg p-4 hover:bg-muted/50">
                       <Checkbox
                         id={day.value}
-                        checked={attendanceDays.includes(day.value)}
-                        onCheckedChange={(checked) => handleDayChange(day.value, checked)}
+                        checked={attendanceDays.some(selected => selected.value === day.value)}
+                        onCheckedChange={(checked) => handleDayChange(day, checked)}
                         className="mt-0.5"
                       />
                       <div className="flex-1">
