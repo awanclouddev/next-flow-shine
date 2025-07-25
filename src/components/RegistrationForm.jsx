@@ -9,12 +9,14 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
-import { useToast } from '@/hooks/use-toast';
+import SuccessModal from './SuccessModal';
 import { User, Phone, Mail, MapPin, GraduationCap, Building, Calendar, Users, Tag } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const RegistrationForm = () => {
   const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm();
-  const { toast } = useToast();
+  const navigate = useNavigate();
+  const [showSuccessModal, setShowSuccessModal] = React.useState(false);
   const attendanceDays = watch('attendanceDays') || [];
 
   const educationLevels = [
@@ -60,10 +62,16 @@ const RegistrationForm = () => {
 
   const onSubmit = (data) => {
     console.log('Form submitted:', data);
-    toast({
-      title: "Registrasi Berhasil!",
-      description: "Data Anda telah diterima. Tiket gratis akan dikirim melalui email.",
-    });
+    setShowSuccessModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowSuccessModal(false);
+  };
+
+  const handleContinueToSuccess = () => {
+    setShowSuccessModal(false);
+    navigate('/registration-success');
   };
 
   return (
@@ -454,6 +462,13 @@ const RegistrationForm = () => {
             </form>
           </CardContent>
         </Card>
+
+        {/* Success Modal */}
+        <SuccessModal
+          isOpen={showSuccessModal}
+          onClose={handleCloseModal}
+          onContinue={handleContinueToSuccess}
+        />
 
       </div>
     </div>
