@@ -20,13 +20,13 @@ const AdminLayout = () => {
   };
 
   return (
-    <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-gradient-to-br from-blue-50 to-white">
+    <SidebarProvider defaultOpen={true}>
+      <div className="min-h-screen flex w-full">
         <AdminSidebar onLogout={handleLogout} />
         
-        <main className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col min-w-0">
           {/* Header */}
-          <div className="bg-white border-b">
+          <div className="bg-white border-b sticky top-0 z-10">
             <div className="flex items-center h-16 px-4 sm:px-6 lg:px-8">
               <SidebarTrigger className="mr-4" />
               <div className="flex items-center gap-3">
@@ -44,10 +44,10 @@ const AdminLayout = () => {
           </div>
 
           {/* Main Content */}
-          <div className="flex-1 overflow-auto">
+          <div className="flex-1 bg-gradient-to-br from-blue-50 to-white overflow-auto">
             <Outlet />
           </div>
-        </main>
+        </div>
       </div>
     </SidebarProvider>
   );
