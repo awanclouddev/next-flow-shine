@@ -37,7 +37,6 @@ const menuItems = [
 const AdminSidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { collapsed } = useSidebar();
 
   const handleLogout = () => {
     localStorage.removeItem('isAdminLoggedIn');
