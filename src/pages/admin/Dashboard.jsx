@@ -129,15 +129,15 @@ const AdminDashboard = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {recentActivities.map((activity) => (
-                    <div key={activity.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50">
+                    <div key={activity.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50 border border-border">
                       <div className={`p-2 rounded-full bg-muted`}>
                         <activity.icon className={`h-4 w-4 ${activity.color}`} />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-medium text-foreground">{activity.action}</p>
-                        <p className="text-sm text-muted-foreground">{activity.detail}</p>
+                        <p className="font-medium text-foreground text-sm">{activity.action}</p>
+                        <p className="text-xs text-muted-foreground">{activity.detail}</p>
                         <p className="text-xs text-muted-foreground mt-1">{activity.time}</p>
                       </div>
                     </div>
