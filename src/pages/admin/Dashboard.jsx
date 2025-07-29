@@ -147,24 +147,9 @@ const AdminDashboard = () => {
             </Card>
           </div>
 
-          {/* Quick Actions */}
+          {/* Event Info */}
           <div>
             <Card>
-              <CardHeader>
-                <CardTitle>Aksi Cepat</CardTitle>
-                <CardDescription>
-                  Akses fitur utama dengan cepat
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <p className="text-sm text-muted-foreground">
-                  Semua aksi cepat telah dipindahkan ke menu sidebar untuk kemudahan akses
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* Event Info */}
-            <Card className="mt-6">
               <CardHeader>
                 <CardTitle>Info Event</CardTitle>
               </CardHeader>

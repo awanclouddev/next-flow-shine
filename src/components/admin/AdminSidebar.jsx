@@ -33,12 +33,6 @@ const menuItems = [
   { title: "Barcode Scanner", url: "/admin/scanner", icon: QrCode },
 ];
 
-const otherItems = [
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "Payment", url: "/admin/payment", icon: CreditCard },
-  { title: "Accounts", url: "/admin/accounts", icon: UserCheck },
-  { title: "Help", url: "/admin/help", icon: HelpCircle },
-];
 
 const AdminSidebar = () => {
   const navigate = useNavigate();
@@ -99,31 +93,6 @@ const AdminSidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {/* Others Section */}
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3 px-2">
-            Others
-          </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {otherItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    onClick={() => navigate(item.url)}
-                    className={`w-full justify-start transition-colors mb-1 h-10 ${
-                      isActive(item.url) 
-                        ? "bg-primary text-primary-foreground hover:bg-primary/90" 
-                        : "hover:bg-accent hover:text-accent-foreground"
-                    }`}
-                  >
-                    <item.icon className="w-4 h-4 shrink-0" />
-                    {!collapsed && <span className="ml-3 truncate">{item.title}</span>}
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
       </SidebarContent>
 
       {/* Footer */}
@@ -139,11 +108,6 @@ const AdminSidebar = () => {
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
-        
-        {/* Sidebar Toggle */}
-        <div className="mt-2">
-          <SidebarTrigger className="w-full h-8" />
-        </div>
       </SidebarFooter>
     </Sidebar>
   );
