@@ -56,21 +56,11 @@ const RegistrationConfirmation = () => {
               <div className="relative z-10 text-center mb-8">
                 {/* IP EXHIBITION logo */}
                 <div className="flex items-center justify-center mb-6">
-                  <div className="flex items-center">
-                    {/* IP logo recreation */}
-                    <div className="mr-4">
-                      <div className="flex items-end space-x-1">
-                        <div className="flex flex-col space-y-1">
-                          <div className="w-8 h-8 bg-blue-600 rounded-md"></div>
-                          <div className="w-8 h-12 bg-blue-600 rounded-md"></div>
-                        </div>
-                        <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 rounded-md flex items-center justify-center transform rotate-45">
-                          <div className="w-4 h-4 bg-white transform -rotate-45"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <span className="text-4xl font-bold text-blue-800 tracking-wider">EXHIBITION</span>
-                  </div>
+                  <img 
+                    src="/lovable-uploads/ef49a089-6124-4be5-860c-2c6ad0036815.png" 
+                    alt="IP EXHIBITION" 
+                    className="max-w-md w-full h-auto"
+                  />
                 </div>
 
                 {/* Success message */}
