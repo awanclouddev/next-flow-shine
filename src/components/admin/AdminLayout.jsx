@@ -14,14 +14,14 @@ const AdminLayout = ({ children }) => {
   }, [navigate]);
 
   return (
-    <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-background">
+    <SidebarProvider defaultOpen={true}>
+      <div className="min-h-screen w-full flex bg-background">
         <AdminSidebar />
-        <main className="flex-1 flex flex-col min-w-0">
-          <div className="flex-1 overflow-auto">
+        <div className="flex-1 flex flex-col min-w-0">
+          <main className="flex-1 p-0 overflow-auto">
             {children}
-          </div>
-        </main>
+          </main>
+        </div>
       </div>
     </SidebarProvider>
   );
