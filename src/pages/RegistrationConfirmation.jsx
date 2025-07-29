@@ -51,11 +51,11 @@ const RegistrationConfirmation = () => {
           </div>
 
           {/* Decorative wave border */}
-          <div className="h-8 bg-white relative">
-            <svg viewBox="0 0 400 30" className="w-full h-full">
+          <div className="h-6 bg-white relative overflow-hidden">
+            <svg viewBox="0 0 400 24" className="w-full h-full">
               <defs>
-                <pattern id="wave" x="0" y="0" width="40" height="30" patternUnits="userSpaceOnUse">
-                  <circle cx="20" cy="30" r="15" fill="#2563eb" />
+                <pattern id="wave" x="0" y="0" width="30" height="24" patternUnits="userSpaceOnUse">
+                  <path d="M0 24 Q7.5 0 15 24 Q22.5 0 30 24" fill="#2563eb" />
                 </pattern>
               </defs>
               <rect width="100%" height="100%" fill="url(#wave)" />
