@@ -50,15 +50,15 @@ const RegistrationConfirmation = () => {
             </div>
           </div>
 
-          {/* Decorative wave border */}
-          <div className="h-6 bg-white relative overflow-hidden">
-            <svg viewBox="0 0 400 24" className="w-full h-full">
+          {/* Decorative scalloped border */}
+          <div className="h-4 bg-white relative overflow-hidden">
+            <svg viewBox="0 0 400 16" className="w-full h-full" preserveAspectRatio="none">
               <defs>
-                <pattern id="wave" x="0" y="0" width="30" height="24" patternUnits="userSpaceOnUse">
-                  <path d="M0 24 Q7.5 0 15 24 Q22.5 0 30 24" fill="#2563eb" />
+                <pattern id="scallop" x="0" y="0" width="20" height="16" patternUnits="userSpaceOnUse">
+                  <circle cx="10" cy="0" r="8" fill="#2563eb" />
                 </pattern>
               </defs>
-              <rect width="100%" height="100%" fill="url(#wave)" />
+              <rect width="100%" height="100%" fill="url(#scallop)" />
             </svg>
           </div>
 
