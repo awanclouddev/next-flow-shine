@@ -1,7 +1,23 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, Building, Calendar, TrendingUp, UserPlus, Mail } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Users, Building, Calendar, TrendingUp, Eye, UserPlus, Mail, Scan } from 'lucide-react';
 
 const AdminDashboard = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
+    if (!isLoggedIn) {
+      navigate('/admin/login');
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('isAdminLoggedIn');
+    navigate('/admin/login');
+  };
 
   const stats = [
     {
@@ -78,7 +94,40 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+      {/* Header */}
+      <div className="bg-white border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center gap-3">
+              <img 
+                src="/lovable-uploads/2a9754aa-9a18-46dd-b388-ad079832413e.png" 
+                alt="IPExpose Indonesia Logo" 
+                className="h-8 w-auto object-contain"
+              />
+              <div>
+                <h1 className="text-xl font-bold text-foreground">Admin Dashboard</h1>
+                <p className="text-sm text-muted-foreground">IPExpose Indonesia 2025</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <Button
+                variant="outline"
+                onClick={() => navigate('/admin/participants')}
+              >
+                <Users className="h-4 w-4 mr-2" />
+                Kelola Peserta
+              </Button>
+              <Button variant="outline" onClick={handleLogout}>
+                Logout
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-foreground mb-2">Selamat Datang, Admin!</h2>
@@ -118,31 +167,114 @@ const AdminDashboard = () => {
           ))}
         </div>
 
-        {/* Recent Activities */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Aktivitas Terbaru</CardTitle>
-            <CardDescription>
-              Pantau aktivitas terbaru di platform
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {recentActivities.map((activity) => (
-                <div key={activity.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50">
-                  <div className={`p-2 rounded-full bg-muted`}>
-                    <activity.icon className={`h-4 w-4 ${activity.color}`} />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Recent Activities */}
+          <div className="lg:col-span-2">
+            <Card>
+              <CardHeader>
+                <CardTitle>Aktivitas Terbaru</CardTitle>
+                <CardDescription>
+                  Pantau aktivitas terbaru di platform
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {recentActivities.map((activity) => (
+                    <div key={activity.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50">
+                      <div className={`p-2 rounded-full bg-muted`}>
+                        <activity.icon className={`h-4 w-4 ${activity.color}`} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-medium text-foreground">{activity.action}</p>
+                        <p className="text-sm text-muted-foreground">{activity.detail}</p>
+                        <p className="text-xs text-muted-foreground mt-1">{activity.time}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Quick Actions */}
+          <div>
+            <Card>
+              <CardHeader>
+                <CardTitle>Aksi Cepat</CardTitle>
+                <CardDescription>
+                  Akses fitur utama dengan cepat
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Button 
+                  className="w-full justify-start"
+                  onClick={() => navigate('/admin/participants')}
+                >
+                  <Users className="h-4 w-4 mr-2" />
+                  Kelola Peserta
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start"
+                  onClick={() => navigate('/admin/participants')}
+                >
+                  <Eye className="h-4 w-4 mr-2" />
+                  Lihat Detail Peserta
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start"
+                  onClick={() => navigate('/admin/scanner')}
+                >
+                  <Scan className="h-4 w-4 mr-2" />
+                  Scanner Barcode
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start"
+                >
+                  <Mail className="h-4 w-4 mr-2" />
+                  Kirim Email Massal
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start"
+                >
+                  <Building className="h-4 w-4 mr-2" />
+                  Kelola Exhibitor
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Event Info */}
+            <Card className="mt-6">
+              <CardHeader>
+                <CardTitle>Info Event</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">Tanggal Event</span>
+                    <span className="text-sm font-medium">13-16 Agu 2025</span>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium text-foreground">{activity.action}</p>
-                    <p className="text-sm text-muted-foreground">{activity.detail}</p>
-                    <p className="text-xs text-muted-foreground mt-1">{activity.time}</p>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">Lokasi</span>
+                    <span className="text-sm font-medium">Jakarta</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">Kapasitas</span>
+                    <span className="text-sm font-medium">5,000 peserta</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">Status</span>
+                    <span className="text-sm font-medium text-green-600">Aktif</span>
                   </div>
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -30,10 +31,12 @@ import {
   Trash2,
   Mail,
   Download,
-  ArrowUpDown
+  ArrowUpDown,
+  ArrowLeft
 } from 'lucide-react';
 
 const AdminParticipants = () => {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [filterGender, setFilterGender] = useState('all');
   const [filterEducation, setFilterEducation] = useState('all');
@@ -41,6 +44,13 @@ const AdminParticipants = () => {
   const [sortOrder, setSortOrder] = useState('desc');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
+    if (!isLoggedIn) {
+      navigate('/admin/login');
+    }
+  }, [navigate]);
 
   // Mock data - replace with real API call
   const allParticipants = [
@@ -175,21 +185,37 @@ const AdminParticipants = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
       {/* Header */}
-      <div className="flex justify-between items-center mb-8">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">Kelola Peserta</h1>
-          <p className="text-muted-foreground">Kelola data peserta IPExpose 2025</p>
-        </div>
-        
-        <div className="flex items-center gap-4">
-          <Button variant="outline">
-            <Download className="h-4 w-4 mr-2" />
-            Export Data
-          </Button>
+      <div className="bg-white border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center gap-3">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate('/admin/dashboard')}
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Kembali
+              </Button>
+              <div>
+                <h1 className="text-xl font-bold text-foreground">Kelola Peserta</h1>
+                <p className="text-sm text-muted-foreground">Kelola data peserta IPExpose 2025</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <Button variant="outline">
+                <Download className="h-4 w-4 mr-2" />
+                Export Data
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Card>
@@ -459,6 +485,7 @@ const AdminParticipants = () => {
             )}
           </CardContent>
         </Card>
+      </div>
     </div>
   );
 };
