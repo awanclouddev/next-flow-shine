@@ -70,42 +70,52 @@ const RegistrationConfirmation = () => {
 
           {/* Blue section with event details */}
           <div className="bg-blue-600 text-white p-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-              {/* Time */}
-              <div className="flex items-center space-x-3">
-                <Clock className="w-6 h-6 flex-shrink-0" />
-                <span className="text-lg font-medium">09:00 - 16:00</span>
-              </div>
-              
-              {/* Date */}
-              <div className="flex items-center space-x-3">
-                <Calendar className="w-6 h-6 flex-shrink-0" />
-                <span className="text-lg font-medium">13 - 16 Agustus 2025</span>
-              </div>
-              
-              {/* Location */}
-              <div className="flex items-center space-x-3">
-                <MapPin className="w-6 h-6 flex-shrink-0" />
-                <div className="text-lg font-medium">
-                  <div>Convention Hall, SMESCO</div>
-                  <div>Jakarta Selatan</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              {/* QR Code section - LEFT SIDE */}
+              <div className="flex justify-center md:justify-start">
+                <div className="bg-white p-4 rounded-lg">
+                  <div className="w-32 h-32 bg-white rounded flex items-center justify-center">
+                    <div className="w-28 h-28 grid grid-cols-21 gap-px">
+                      {Array.from({ length: 441 }).map((_, i) => {
+                        // Create a more realistic QR code pattern
+                        const row = Math.floor(i / 21);
+                        const col = i % 21;
+                        const isCorner = (row < 7 && col < 7) || (row < 7 && col > 13) || (row > 13 && col < 7);
+                        const isTiming = row === 6 || col === 6;
+                        const isData = !isCorner && !isTiming;
+                        const shouldBeFilled = isCorner || isTiming || (isData && Math.random() > 0.5);
+                        
+                        return (
+                          <div
+                            key={i}
+                            className={`w-full h-full ${
+                              shouldBeFilled ? 'bg-black' : 'bg-white'
+                            }`}
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* QR Code section - centered below */}
-            <div className="flex justify-center mt-8">
-              <div className="bg-white p-4 rounded-lg">
-                <div className="w-32 h-32 bg-black rounded flex items-center justify-center">
-                  <div className="grid grid-cols-8 gap-px w-28 h-28">
-                    {Array.from({ length: 64 }).map((_, i) => (
-                      <div
-                        key={i}
-                        className={`w-full h-full ${
-                          Math.random() > 0.5 ? 'bg-black' : 'bg-white'
-                        }`}
-                      />
-                    ))}
+              {/* Event details - RIGHT SIDE */}
+              <div className="space-y-6">
+                <div className="flex items-center space-x-3">
+                  <Clock className="w-6 h-6 flex-shrink-0" />
+                  <span className="text-lg font-medium">09:00 - 16:00</span>
+                </div>
+                
+                <div className="flex items-center space-x-3">
+                  <Calendar className="w-6 h-6 flex-shrink-0" />
+                  <span className="text-lg font-medium">13 - 16 Agustus 2025</span>
+                </div>
+                
+                <div className="flex items-center space-x-3">
+                  <MapPin className="w-6 h-6 flex-shrink-0" />
+                  <div className="text-lg font-medium">
+                    <div>Convention Hall, SMESCO</div>
+                    <div>Jakarta Selatan</div>
                   </div>
                 </div>
               </div>
