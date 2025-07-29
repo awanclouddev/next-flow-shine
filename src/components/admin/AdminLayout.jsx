@@ -14,21 +14,19 @@ const AdminLayout = ({ children }) => {
   }, [navigate]);
 
   return (
-    <SidebarProvider defaultOpen={true}>
-      <div className="min-h-screen flex w-full">
-        {/* Bagian 1: Side Menu (Kiri) */}
-        <div className="shrink-0">
-          <AdminSidebar />
-        </div>
-        
-        {/* Bagian 2: Konten (Kanan) */}
-        <div className="flex-1 min-w-0 bg-background">
-          <main className="h-full overflow-auto">
-            {children}
-          </main>
-        </div>
+    <div className="min-h-screen flex w-full bg-background">
+      {/* Bagian 1: Sidebar (Kiri) - Fixed width */}
+      <div className="w-64 bg-card border-r border-border flex-shrink-0">
+        <AdminSidebar />
       </div>
-    </SidebarProvider>
+      
+      {/* Bagian 2: Content Area (Kanan) - Flexible width */}
+      <div className="flex-1 overflow-hidden">
+        <main className="h-screen overflow-auto p-6">
+          {children}
+        </main>
+      </div>
+    </div>
   );
 };
 

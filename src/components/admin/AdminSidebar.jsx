@@ -47,69 +47,56 @@ const AdminSidebar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <Sidebar 
-      className="border-r border-border bg-background"
-      collapsible="icon"
-    >
+    <div className="h-screen flex flex-col bg-card">
       {/* Header */}
-      <SidebarHeader className="p-4 border-b border-border bg-background">
+      <div className="p-4 border-b border-border">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center shrink-0">
             <span className="text-primary-foreground font-bold text-sm">IP</span>
           </div>
-          {!collapsed && (
-            <div className="min-w-0">
-              <h2 className="font-semibold text-foreground text-sm">IPExpose</h2>
-              <p className="text-xs text-muted-foreground">Admin Portal</p>
-            </div>
-          )}
+          <div className="min-w-0">
+            <h2 className="font-semibold text-foreground text-sm">IPExpose</h2>
+            <p className="text-xs text-muted-foreground">Admin Portal</p>
+          </div>
         </div>
-      </SidebarHeader>
+      </div>
 
-      <SidebarContent className="px-3 py-4">
-        {/* Menu Section */}
-        <SidebarGroup className="mb-6">
-          <SidebarGroupLabel className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3 px-2">
-            Menu
-          </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {menuItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    onClick={() => navigate(item.url)}
-                    className={`w-full justify-start transition-colors mb-1 h-10 ${
-                      isActive(item.url) 
-                        ? "bg-primary text-primary-foreground hover:bg-primary/90" 
-                        : "hover:bg-accent hover:text-accent-foreground"
-                    }`}
-                  >
-                    <item.icon className="w-4 h-4 shrink-0" />
-                    {!collapsed && <span className="ml-3 truncate">{item.title}</span>}
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-      </SidebarContent>
+      {/* Menu Content */}
+      <div className="flex-1 px-3 py-4 overflow-auto">
+        <div className="mb-6">
+          <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3 px-2">
+            MENU
+          </div>
+          <div className="space-y-1">
+            {menuItems.map((item) => (
+              <button
+                key={item.title}
+                onClick={() => navigate(item.url)}
+                className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors ${
+                  isActive(item.url) 
+                    ? "bg-primary text-primary-foreground" 
+                    : "hover:bg-accent hover:text-accent-foreground text-muted-foreground"
+                }`}
+              >
+                <item.icon className="w-4 h-4 shrink-0" />
+                <span className="truncate">{item.title}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* Footer */}
-      <SidebarFooter className="p-3 border-t border-border bg-background">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              onClick={handleLogout}
-              className="w-full justify-start text-destructive hover:bg-destructive/10 hover:text-destructive transition-colors h-10"
-            >
-              <LogOut className="w-4 h-4 shrink-0" />
-              {!collapsed && <span className="ml-3">Logout</span>}
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
-    </Sidebar>
+      <div className="p-3 border-t border-border">
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm text-destructive hover:bg-destructive/10 transition-colors"
+        >
+          <LogOut className="w-4 h-4 shrink-0" />
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
   );
 };
 
