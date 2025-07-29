@@ -4,9 +4,19 @@ import { Card } from '@/components/ui/card';
 
 const RegistrationConfirmation = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white p-4">
-      <div className="max-w-4xl mx-auto">
-        <Card className="overflow-hidden border-0 shadow-2xl">
+    <div 
+      className="min-h-screen p-4 relative"
+      style={{
+        backgroundImage: "url('/lovable-uploads/b0c525fc-4c2c-4b18-a94e-cc9247a6bce2.png')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      {/* Background overlay */}
+      <div className="absolute inset-0 bg-white/80 backdrop-blur-sm"></div>
+      <div className="max-w-4xl mx-auto relative z-10">
+        <Card className="overflow-hidden border-0 shadow-2xl bg-white/95 backdrop-blur-sm">
           {/* Header with logos */}
           <div className="bg-white p-6 flex justify-between items-center border-b">
             <div className="flex items-center space-x-4">
