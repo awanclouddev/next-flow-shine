@@ -6,6 +6,7 @@ import RegistrationConfirmation from "./pages/RegistrationConfirmation";
 import AdminLogin from "./pages/admin/Login";
 import AdminDashboard from "./pages/admin/Dashboard";
 import AdminParticipants from "./pages/admin/Participants";
+import AdminBarcodeScanner from "./pages/admin/BarcodeScanner";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/participants" element={<AdminParticipants />} />
+        <Route path="/admin/scanner" element={<AdminBarcodeScanner />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

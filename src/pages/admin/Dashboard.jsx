@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Users, Building, Calendar, TrendingUp, Eye, UserPlus, Mail } from 'lucide-react';
+import { Users, Building, Calendar, TrendingUp, Eye, UserPlus, Mail, Scan } from 'lucide-react';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -220,6 +220,14 @@ const AdminDashboard = () => {
                 >
                   <Eye className="h-4 w-4 mr-2" />
                   Lihat Detail Peserta
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start"
+                  onClick={() => navigate('/admin/scanner')}
+                >
+                  <Scan className="h-4 w-4 mr-2" />
+                  Scanner Barcode
                 </Button>
                 <Button 
                   variant="outline" 
