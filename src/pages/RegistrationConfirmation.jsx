@@ -51,13 +51,14 @@ const RegistrationConfirmation = () => {
           </div>
 
           {/* Decorative scalloped border */}
-          <div className="h-4 bg-white relative overflow-hidden">
+          <div className="h-4 bg-blue-600 relative overflow-hidden">
             <svg viewBox="0 0 400 16" className="w-full h-full" preserveAspectRatio="none">
               <defs>
                 <pattern id="scallop" x="0" y="0" width="20" height="16" patternUnits="userSpaceOnUse">
-                  <circle cx="10" cy="0" r="8" fill="#2563eb" />
+                  <circle cx="10" cy="0" r="8" fill="white" />
                 </pattern>
               </defs>
+              <rect width="100%" height="100%" fill="#2563eb" />
               <rect width="100%" height="100%" fill="url(#scallop)" />
             </svg>
           </div>
