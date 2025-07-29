@@ -7,6 +7,7 @@ import AdminLogin from "./pages/admin/Login";
 import AdminDashboard from "./pages/admin/Dashboard";
 import AdminParticipants from "./pages/admin/Participants";
 import AdminBarcodeScanner from "./pages/admin/BarcodeScanner";
+import AdminLayout from "./components/admin/AdminLayout";
 
 function App() {
   return (
@@ -16,9 +17,9 @@ function App() {
         <Route path="/registration-success" element={<RegistrationSuccess />} />
         <Route path="/registration-confirmation" element={<RegistrationConfirmation />} />
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/participants" element={<AdminParticipants />} />
-        <Route path="/admin/scanner" element={<AdminBarcodeScanner />} />
+        <Route path="/admin/dashboard" element={<AdminLayout><AdminDashboard /></AdminLayout>} />
+        <Route path="/admin/participants" element={<AdminLayout><AdminParticipants /></AdminLayout>} />
+        <Route path="/admin/scanner" element={<AdminLayout><AdminBarcodeScanner /></AdminLayout>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

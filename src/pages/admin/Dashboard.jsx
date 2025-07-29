@@ -1,23 +1,7 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Users, Building, Calendar, TrendingUp, Eye, UserPlus, Mail, Scan } from 'lucide-react';
+import { Users, Building, Calendar, TrendingUp, UserPlus, Mail } from 'lucide-react';
 
 const AdminDashboard = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
-    if (!isLoggedIn) {
-      navigate('/admin/login');
-    }
-  }, [navigate]);
-
-  const handleLogout = () => {
-    localStorage.removeItem('isAdminLoggedIn');
-    navigate('/admin/login');
-  };
 
   const stats = [
     {
@@ -94,50 +78,17 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
-      {/* Header */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-3">
-              <img 
-                src="/lovable-uploads/2a9754aa-9a18-46dd-b388-ad079832413e.png" 
-                alt="IPExpose Indonesia Logo" 
-                className="h-8 w-auto object-contain"
-              />
-              <div>
-                <h1 className="text-xl font-bold text-foreground">Admin Dashboard</h1>
-                <p className="text-sm text-muted-foreground">IPExpose Indonesia 2025</p>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-4">
-              <Button
-                variant="outline"
-                onClick={() => navigate('/admin/participants')}
-              >
-                <Users className="h-4 w-4 mr-2" />
-                Kelola Peserta
-              </Button>
-              <Button variant="outline" onClick={handleLogout}>
-                Logout
-              </Button>
-            </div>
-          </div>
-        </div>
+    <div className="p-8 space-y-8">
+      {/* Welcome Section */}
+      <div>
+        <h2 className="text-3xl font-bold text-foreground mb-2">Selamat Datang, Admin!</h2>
+        <p className="text-muted-foreground">
+          Kelola event IPExpose Indonesia 2025 dari dashboard ini
+        </p>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Welcome Section */}
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-foreground mb-2">Selamat Datang, Admin!</h2>
-          <p className="text-muted-foreground">
-            Kelola event IPExpose Indonesia 2025 dari dashboard ini
-          </p>
-        </div>
-
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
             <Card key={index} className="hover:shadow-lg transition-shadow">
               <CardContent className="p-6">
@@ -165,9 +116,9 @@ const AdminDashboard = () => {
               </CardContent>
             </Card>
           ))}
-        </div>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Recent Activities */}
           <div className="lg:col-span-2">
             <Card>
@@ -206,43 +157,9 @@ const AdminDashboard = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Button 
-                  className="w-full justify-start"
-                  onClick={() => navigate('/admin/participants')}
-                >
-                  <Users className="h-4 w-4 mr-2" />
-                  Kelola Peserta
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="w-full justify-start"
-                  onClick={() => navigate('/admin/participants')}
-                >
-                  <Eye className="h-4 w-4 mr-2" />
-                  Lihat Detail Peserta
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="w-full justify-start"
-                  onClick={() => navigate('/admin/scanner')}
-                >
-                  <Scan className="h-4 w-4 mr-2" />
-                  Scanner Barcode
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="w-full justify-start"
-                >
-                  <Mail className="h-4 w-4 mr-2" />
-                  Kirim Email Massal
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="w-full justify-start"
-                >
-                  <Building className="h-4 w-4 mr-2" />
-                  Kelola Exhibitor
-                </Button>
+                <p className="text-sm text-muted-foreground">
+                  Semua aksi cepat telah dipindahkan ke menu sidebar untuk kemudahan akses
+                </p>
               </CardContent>
             </Card>
 
@@ -272,7 +189,6 @@ const AdminDashboard = () => {
                 </div>
               </CardContent>
             </Card>
-          </div>
         </div>
       </div>
     </div>

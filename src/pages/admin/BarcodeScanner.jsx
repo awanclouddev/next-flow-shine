@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,11 +6,10 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Camera, CameraOff, Scan, UserCheck, X, CheckCircle, AlertCircle, ArrowLeft } from 'lucide-react';
+import { Camera, CameraOff, Scan, UserCheck, X, CheckCircle } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 
 const BarcodeScanner = () => {
-  const navigate = useNavigate();
   const videoRef = useRef(null);
   const [isScanning, setIsScanning] = useState(false);
   const [hasCamera, setHasCamera] = useState(false);
@@ -37,17 +35,12 @@ const BarcodeScanner = () => {
     }
   ]);
 
-  useEffect(() => {
-    const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
-    if (!isLoggedIn) {
-      navigate('/admin/login');
-    }
-    
+  useEffect(() => {    
     // Check if camera is available
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       setHasCamera(true);
     }
-  }, [navigate]);
+  }, []);
 
   const startScanning = async () => {
     try {
@@ -143,42 +136,19 @@ const BarcodeScanner = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+    <div className="p-8 space-y-8">
       {/* Header */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-3">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => navigate('/admin/dashboard')}
-                className="mr-2"
-              >
-                <ArrowLeft className="h-4 w-4" />
-              </Button>
-              <img 
-                src="/lovable-uploads/2a9754aa-9a18-46dd-b388-ad079832413e.png" 
-                alt="IPExpose Indonesia Logo" 
-                className="h-8 w-auto object-contain"
-              />
-              <div>
-                <h1 className="text-xl font-bold text-foreground">Scanner Barcode</h1>
-                <p className="text-sm text-muted-foreground">IPExpose Indonesia 2025</p>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-4">
-              <Badge variant="outline" className="bg-green-50 text-green-700">
-                {recentScans.length} scan hari ini
-              </Badge>
-            </div>
-          </div>
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-bold text-foreground">Scanner Barcode</h1>
+          <p className="text-muted-foreground">IPExpose Indonesia 2025</p>
         </div>
+        
+        <Badge variant="outline" className="bg-green-50 text-green-700">
+          {recentScans.length} scan hari ini
+        </Badge>
       </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Scanner Section */}
           <div className="lg:col-span-2">
             <Card className="mb-6">
@@ -374,7 +344,6 @@ const BarcodeScanner = () => {
                 </div>
               </CardContent>
             </Card>
-          </div>
         </div>
       </div>
     </div>
