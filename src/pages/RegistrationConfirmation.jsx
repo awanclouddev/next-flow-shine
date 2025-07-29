@@ -10,18 +10,12 @@ const RegistrationConfirmation = () => {
           {/* Header with logos */}
           <div className="bg-white p-6 flex justify-between items-center">
             <div className="flex items-center">
-              {/* DGIP Logo */}
-              <div className="w-20 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center relative">
-                <div className="absolute top-2 left-2 w-3 h-3 bg-blue-600 rounded-sm"></div>
-                <div className="absolute top-2 right-2 w-3 h-3 bg-blue-600 rounded-sm"></div>
-                <div className="absolute bottom-2 left-2 w-3 h-3 bg-blue-600 rounded-sm"></div>
-                <div className="absolute bottom-2 right-2 w-3 h-3 bg-blue-600 rounded-sm"></div>
-                <span className="text-blue-800 font-bold text-xs">DGIP</span>
-              </div>
-              <div className="ml-2 text-xs text-gray-600">
-                <div className="font-semibold">KEMENTERIAN HUKUM DAN HAM REPUBLIK INDONESIA</div>
-                <div>DIREKTORAT JENDERAL KEKAYAAN INTELEKTUAL</div>
-              </div>
+              {/* DJDKI Logo */}
+              <img 
+                src="/lovable-uploads/66947fd7-7c64-42db-b5e4-f6fdc3bcb546.png" 
+                alt="DJDKI Logo" 
+                className="h-16 w-auto"
+              />
             </div>
             <div className="flex items-center">
               {/* IP XPOSE Logo */}
@@ -71,35 +65,7 @@ const RegistrationConfirmation = () => {
           {/* Blue section with event details */}
           <div className="bg-blue-600 text-white p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              {/* QR Code section - LEFT SIDE */}
-              <div className="flex justify-center md:justify-start">
-                <div className="bg-white p-4 rounded-lg">
-                  <div className="w-32 h-32 bg-white rounded flex items-center justify-center">
-                    <div className="w-28 h-28 grid grid-cols-21 gap-px">
-                      {Array.from({ length: 441 }).map((_, i) => {
-                        // Create a more realistic QR code pattern
-                        const row = Math.floor(i / 21);
-                        const col = i % 21;
-                        const isCorner = (row < 7 && col < 7) || (row < 7 && col > 13) || (row > 13 && col < 7);
-                        const isTiming = row === 6 || col === 6;
-                        const isData = !isCorner && !isTiming;
-                        const shouldBeFilled = isCorner || isTiming || (isData && Math.random() > 0.5);
-                        
-                        return (
-                          <div
-                            key={i}
-                            className={`w-full h-full ${
-                              shouldBeFilled ? 'bg-black' : 'bg-white'
-                            }`}
-                          />
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Event details - RIGHT SIDE */}
+              {/* Event details - LEFT SIDE */}
               <div className="space-y-6">
                 <div className="flex items-center space-x-3">
                   <Clock className="w-6 h-6 flex-shrink-0" />
@@ -117,6 +83,17 @@ const RegistrationConfirmation = () => {
                     <div>Convention Hall, SMESCO</div>
                     <div>Jakarta Selatan</div>
                   </div>
+                </div>
+              </div>
+
+              {/* QR Code section - RIGHT SIDE */}
+              <div className="flex justify-center md:justify-end">
+                <div className="bg-white p-4 rounded-lg">
+                  <img 
+                    src="/lovable-uploads/98a20163-55bd-464e-b088-fb73ea2bed81.png" 
+                    alt="QR Code" 
+                    className="w-32 h-32"
+                  />
                 </div>
               </div>
             </div>
