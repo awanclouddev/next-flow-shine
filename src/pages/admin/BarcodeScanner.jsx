@@ -201,15 +201,16 @@ const BarcodeScanner = () => {
                   <TabsContent value="camera" className="mt-6">
                     <div className="space-y-4">
                       <div className="relative bg-gray-100 rounded-lg overflow-hidden" style={{ aspectRatio: '4/3' }}>
-                        {isScanning ? (
-                          <video
-                            ref={videoRef}
-                            autoPlay
-                            playsInline
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center">
+                        <video
+                          ref={videoRef}
+                          autoPlay
+                          playsInline
+                          className="w-full h-full object-cover"
+                          style={{ display: isScanning ? 'block' : 'none' }}
+                        />
+                        
+                        {!isScanning && (
+                          <div className="absolute inset-0 flex items-center justify-center">
                             <div className="text-center">
                               <CameraOff className="h-16 w-16 mx-auto text-gray-400 mb-4" />
                               <p className="text-gray-500">Kamera tidak aktif</p>
