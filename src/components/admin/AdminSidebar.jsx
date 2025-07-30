@@ -11,7 +11,7 @@ import {
   LogOut,
   Menu
 } from "lucide-react";
-import ipexposeLogo from "@/assets/ipexpose-logo.png";
+
 import {
   Sidebar,
   SidebarContent,
@@ -52,7 +52,7 @@ const AdminSidebar = () => {
       <div className="p-4 border-b border-border">
         <div className="flex items-center gap-3">
           <img 
-            src={ipexposeLogo} 
+            src="/lovable-uploads/c5b3c549-7fb1-4399-9867-84c10b24ee32.png" 
             alt="IPExpose Logo" 
             className="w-8 h-8 object-contain shrink-0"
           />
