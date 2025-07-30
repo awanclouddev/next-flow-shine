@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import QrScanner from 'qr-scanner';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,6 +12,7 @@ import { toast } from '@/components/ui/use-toast';
 
 const BarcodeScanner = () => {
   const videoRef = useRef(null);
+  const qrScannerRef = useRef(null);
   const [isScanning, setIsScanning] = useState(false);
   const [hasCamera, setHasCamera] = useState(false);
   const [manualCode, setManualCode] = useState('');
@@ -37,30 +39,46 @@ const BarcodeScanner = () => {
 
   useEffect(() => {    
     // Check if camera is available
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      setHasCamera(true);
-    }
+    QrScanner.hasCamera().then(hasCamera => {
+      setHasCamera(hasCamera);
+    });
+
+    // Cleanup QR scanner on unmount
+    return () => {
+      if (qrScannerRef.current) {
+        qrScannerRef.current.destroy();
+      }
+    };
   }, []);
 
   const startScanning = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ 
-        video: { 
-          facingMode: 'environment',
-          width: { ideal: 640 },
-          height: { ideal: 480 }
-        } 
-      });
-      
       if (videoRef.current) {
-        videoRef.current.srcObject = stream;
+        // Create QR scanner instance
+        qrScannerRef.current = new QrScanner(
+          videoRef.current,
+          (result) => {
+            // Process the scanned QR code
+            processBarcode(result.data);
+            // Optionally stop scanning after successful scan
+            // stopScanning();
+          },
+          {
+            preferredCamera: 'environment', // Use back camera
+            highlightScanRegion: true,
+            highlightCodeOutline: true,
+          }
+        );
+
+        await qrScannerRef.current.start();
         setIsScanning(true);
         toast({
           title: "Kamera Aktif",
-          description: "Arahkan kamera ke barcode untuk memindai",
+          description: "Arahkan kamera ke QR code untuk memindai",
         });
       }
     } catch (error) {
+      console.error('Error starting QR scanner:', error);
       toast({
         title: "Error",
         description: "Tidak dapat mengakses kamera. Pastikan izin kamera telah diberikan.",
@@ -70,10 +88,8 @@ const BarcodeScanner = () => {
   };
 
   const stopScanning = () => {
-    if (videoRef.current && videoRef.current.srcObject) {
-      const tracks = videoRef.current.srcObject.getTracks();
-      tracks.forEach(track => track.stop());
-      videoRef.current.srcObject = null;
+    if (qrScannerRef.current) {
+      qrScannerRef.current.stop();
     }
     setIsScanning(false);
   };
@@ -112,8 +128,8 @@ const BarcodeScanner = () => {
     setRecentScans([newScan, ...recentScans.slice(0, 4)]);
 
     toast({
-      title: "Barcode Berhasil Dipindai",
-      description: `Peserta ${mockParticipant.name} telah check-in`,
+      title: "QR Code Berhasil Dipindai",
+      description: `Data QR Code: ${code}`,
     });
   };
 
@@ -140,7 +156,7 @@ const BarcodeScanner = () => {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Scanner Barcode</h1>
+          <h1 className="text-3xl font-bold text-foreground">Scanner QR Code</h1>
           <p className="text-muted-foreground">IPExpose Indonesia 2025</p>
         </div>
         
@@ -153,13 +169,13 @@ const BarcodeScanner = () => {
           <div className="lg:col-span-2">
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Scan className="h-5 w-5" />
-                  Pemindaian Barcode
-                </CardTitle>
-                <CardDescription>
-                  Pilih metode pemindaian barcode peserta
-                </CardDescription>
+                 <CardTitle className="flex items-center gap-2">
+                   <Scan className="h-5 w-5" />
+                   Pemindaian QR Code
+                 </CardTitle>
+                 <CardDescription>
+                   Pilih metode pemindaian QR code peserta
+                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <Tabs defaultValue="camera" className="w-full">
@@ -221,21 +237,21 @@ const BarcodeScanner = () => {
                   
                   <TabsContent value="manual" className="mt-6">
                     <form onSubmit={handleManualSubmit} className="space-y-4">
-                      <div>
-                        <Label htmlFor="manualCode">Kode Barcode</Label>
-                        <Input
-                          id="manualCode"
-                          type="text"
-                          placeholder="Masukkan kode barcode..."
-                          value={manualCode}
-                          onChange={(e) => setManualCode(e.target.value)}
-                          className="mt-1"
-                        />
-                      </div>
-                      <Button type="submit" className="w-full">
-                        <Scan className="h-4 w-4 mr-2" />
-                        Proses Barcode
-                      </Button>
+                       <div>
+                         <Label htmlFor="manualCode">Kode QR Code</Label>
+                         <Input
+                           id="manualCode"
+                           type="text"
+                           placeholder="Masukkan teks dari QR code..."
+                           value={manualCode}
+                           onChange={(e) => setManualCode(e.target.value)}
+                           className="mt-1"
+                         />
+                       </div>
+                       <Button type="submit" className="w-full">
+                         <Scan className="h-4 w-4 mr-2" />
+                         Proses QR Code
+                       </Button>
                     </form>
                   </TabsContent>
                 </Tabs>
