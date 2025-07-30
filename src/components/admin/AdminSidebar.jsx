@@ -54,7 +54,7 @@ const AdminSidebar = () => {
           <img 
             src="/lovable-uploads/c5b3c549-7fb1-4399-9867-84c10b24ee32.png" 
             alt="IPExpose Logo" 
-            className="w-8 h-8 object-contain shrink-0"
+            className="w-12 h-12 object-contain shrink-0"
           />
           <div className="min-w-0">
             <h2 className="font-semibold text-foreground text-sm">IPExpose</h2>
