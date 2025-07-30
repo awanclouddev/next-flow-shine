@@ -60,6 +60,8 @@ const BarcodeScanner = () => {
       }
 
       console.log('Creating QR scanner instance');
+      console.log('Video element:', videoRef.current);
+      
       // Create QR scanner instance
       qrScannerRef.current = new QrScanner(
         videoRef.current,
@@ -67,17 +69,27 @@ const BarcodeScanner = () => {
           console.log('QR Code detected:', result.data);
           // Process the scanned QR code
           processBarcode(result.data);
+          // Stop scanning after successful scan
+          stopScanning();
         },
         {
           preferredCamera: 'environment', // Use back camera
           highlightScanRegion: true,
           highlightCodeOutline: true,
+          maxScansPerSecond: 5,
+          returnDetailedScanResult: true,
         }
       );
 
       console.log('Starting QR scanner');
       await qrScannerRef.current.start();
       setIsScanning(true);
+      
+      // Ensure video is visible
+      if (videoRef.current) {
+        videoRef.current.style.display = 'block';
+        console.log('Video display set to block');
+      }
       
       toast({
         title: "Kamera Aktif",
@@ -87,6 +99,7 @@ const BarcodeScanner = () => {
       console.log('QR scanner started successfully');
     } catch (error) {
       console.error('Error starting QR scanner:', error);
+      setIsScanning(false);
       toast({
         title: "Error",
         description: `Tidak dapat mengakses kamera: ${error.message}`,
