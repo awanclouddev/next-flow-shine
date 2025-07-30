@@ -52,36 +52,44 @@ const BarcodeScanner = () => {
   }, []);
 
   const startScanning = async () => {
+    console.log('startScanning called');
     try {
-      if (videoRef.current) {
-        // Create QR scanner instance
-        qrScannerRef.current = new QrScanner(
-          videoRef.current,
-          (result) => {
-            // Process the scanned QR code
-            processBarcode(result.data);
-            // Optionally stop scanning after successful scan
-            // stopScanning();
-          },
-          {
-            preferredCamera: 'environment', // Use back camera
-            highlightScanRegion: true,
-            highlightCodeOutline: true,
-          }
-        );
-
-        await qrScannerRef.current.start();
-        setIsScanning(true);
-        toast({
-          title: "Kamera Aktif",
-          description: "Arahkan kamera ke QR code untuk memindai",
-        });
+      if (!videoRef.current) {
+        console.error('Video ref not found');
+        return;
       }
+
+      console.log('Creating QR scanner instance');
+      // Create QR scanner instance
+      qrScannerRef.current = new QrScanner(
+        videoRef.current,
+        (result) => {
+          console.log('QR Code detected:', result.data);
+          // Process the scanned QR code
+          processBarcode(result.data);
+        },
+        {
+          preferredCamera: 'environment', // Use back camera
+          highlightScanRegion: true,
+          highlightCodeOutline: true,
+        }
+      );
+
+      console.log('Starting QR scanner');
+      await qrScannerRef.current.start();
+      setIsScanning(true);
+      
+      toast({
+        title: "Kamera Aktif",
+        description: "Arahkan kamera ke QR code untuk memindai",
+      });
+      
+      console.log('QR scanner started successfully');
     } catch (error) {
       console.error('Error starting QR scanner:', error);
       toast({
         title: "Error",
-        description: "Tidak dapat mengakses kamera. Pastikan izin kamera telah diberikan.",
+        description: `Tidak dapat mengakses kamera: ${error.message}`,
         variant: "destructive",
       });
     }
