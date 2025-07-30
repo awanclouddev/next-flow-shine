@@ -218,12 +218,12 @@ const BarcodeScanner = () => {
                           ref={videoRef}
                           autoPlay
                           playsInline
+                          muted
                           className="w-full h-full object-cover"
-                          style={{ display: isScanning ? 'block' : 'none' }}
                         />
                         
                         {!isScanning && (
-                          <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
                             <div className="text-center">
                               <CameraOff className="h-16 w-16 mx-auto text-gray-400 mb-4" />
                               <p className="text-gray-500">Kamera tidak aktif</p>
@@ -233,9 +233,16 @@ const BarcodeScanner = () => {
                         
                         {/* Scanning overlay */}
                         {isScanning && (
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-64 h-64 border-2 border-blue-500 rounded-lg opacity-50">
-                              <div className="w-full h-full border border-white rounded-lg animate-pulse" />
+                          <div className="absolute inset-0 pointer-events-none">
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <div className="w-64 h-64 border-4 border-blue-500 rounded-lg">
+                                <div className="w-full h-full border-2 border-white rounded-lg animate-pulse opacity-70" />
+                              </div>
+                            </div>
+                            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                              <div className="bg-black/70 text-white px-4 py-2 rounded-lg text-sm">
+                                Memindai QR Code...
+                              </div>
                             </div>
                           </div>
                         )}
