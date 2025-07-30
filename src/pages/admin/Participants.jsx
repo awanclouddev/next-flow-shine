@@ -40,76 +40,85 @@ const AdminParticipants = () => {
   const [sortField, setSortField] = useState('registrationDate');
   const [sortOrder, setSortOrder] = useState('desc');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  // Mock data - replace with real API call
-  const allParticipants = [
-    {
-      id: 1,
-      fullName: 'John Doe',
-      email: 'john.doe@email.com',
-      phoneNumber: '081234567890',
-      city: 'Jakarta',
-      gender: 'male',
-      education: 'S1/Sarjana',
-      institution: 'PT. Tech Solutions',
-      registrationDate: '2025-01-20',
-      status: 'confirmed',
-      attendanceDays: ['day1', 'day2']
-    },
-    {
-      id: 2,
-      fullName: 'Sarah Smith',
-      email: 'sarah.smith@email.com',
-      phoneNumber: '082345678901',
-      city: 'Bandung',
-      gender: 'female',
-      education: 'S2/Magister',
-      institution: 'Universitas Teknologi',
-      registrationDate: '2025-01-19',
-      status: 'pending',
-      attendanceDays: ['day1', 'day3']
-    },
-    {
-      id: 3,
-      fullName: 'Ahmad Rahman',
-      email: 'ahmad.rahman@email.com',
-      phoneNumber: '083456789012',
-      city: 'Surabaya',
-      gender: 'male',
-      education: 'D3/Diploma',
-      institution: 'CV. Digital Creative',
-      registrationDate: '2025-01-18',
-      status: 'confirmed',
-      attendanceDays: ['day2', 'day4']
-    },
-    {
-      id: 4,
-      fullName: 'Maria Garcia',
-      email: 'maria.garcia@email.com',
-      phoneNumber: '084567890123',
-      city: 'Medan',
-      gender: 'female',
-      education: 'S1/Sarjana',
-      institution: 'Freelancer',
-      registrationDate: '2025-01-17',
-      status: 'confirmed',
-      attendanceDays: ['day1']
-    },
-    {
-      id: 5,
-      fullName: 'David Wong',
-      email: 'david.wong@email.com',
-      phoneNumber: '085678901234',
-      city: 'Yogyakarta',
-      gender: 'male',
-      education: 'S3/Doktor',
-      institution: 'Institut Teknologi',
-      registrationDate: '2025-01-16',
-      status: 'confirmed',
-      attendanceDays: ['day1', 'day2', 'day3', 'day4']
+  // Generate 100 mock participants
+  const generateMockParticipants = () => {
+    const firstNames = [
+      'Ahmad', 'Budi', 'Citra', 'Dewi', 'Eko', 'Fitri', 'Galih', 'Hani', 'Indra', 'Joko',
+      'Kartika', 'Lina', 'Made', 'Nina', 'Omar', 'Putu', 'Qira', 'Rian', 'Sari', 'Tono',
+      'Udin', 'Vina', 'Wawan', 'Xenia', 'Yanto', 'Zara', 'Adi', 'Bayu', 'Celia', 'Dodi',
+      'Erni', 'Fajar', 'Gita', 'Hendra', 'Ira', 'Jaya', 'Kiki', 'Lia', 'Maya', 'Nanda',
+      'Okta', 'Prita', 'Qori', 'Rizki', 'Sinta', 'Tia', 'Ulum', 'Vera', 'Widi', 'Yoga'
+    ];
+    
+    const lastNames = [
+      'Pratama', 'Sari', 'Putra', 'Putri', 'Rahman', 'Santoso', 'Wijaya', 'Kusuma', 'Wardana', 'Maharani',
+      'Setiawan', 'Handayani', 'Kurniawan', 'Lestari', 'Utomo', 'Wulandari', 'Saputra', 'Dewi', 'Nugroho', 'Anggraini',
+      'Susanto', 'Rahayu', 'Prabowo', 'Oktaviani', 'Gunawan', 'Safitri', 'Hartono', 'Permata', 'Surya', 'Melati',
+      'Irawan', 'Indah', 'Budiman', 'Cantika', 'Haryanto', 'Mawar', 'Suryanto', 'Kusumawati', 'Winarto', 'Siska'
+    ];
+    
+    const cities = [
+      'Jakarta', 'Bandung', 'Surabaya', 'Medan', 'Yogyakarta', 'Semarang', 'Makassar', 'Palembang', 
+      'Tangerang', 'Depok', 'Bekasi', 'Bogor', 'Malang', 'Denpasar', 'Balikpapan', 'Pontianak',
+      'Manado', 'Banjarmasin', 'Pekanbaru', 'Batam', 'Padang', 'Bandar Lampung', 'Cirebon', 'Solo'
+    ];
+    
+    const educations = ['SMA/SMK', 'D3/Diploma', 'S1/Sarjana', 'S2/Magister', 'S3/Doktor'];
+    
+    const institutions = [
+      'PT. Tech Solutions', 'CV. Digital Creative', 'Universitas Teknologi', 'Institut Teknologi',
+      'PT. Inovasi Digital', 'CV. Kreatif Media', 'PT. Solusi Teknologi', 'Freelancer',
+      'PT. Data Analytics', 'CV. Web Developer', 'PT. Mobile Apps', 'Start-up Tech',
+      'PT. Cloud Services', 'CV. UI/UX Design', 'PT. Cyber Security', 'Software House',
+      'PT. AI Development', 'CV. Game Developer', 'PT. E-commerce', 'Digital Agency',
+      'PT. Fintech', 'CV. EdTech', 'PT. HealthTech', 'IoT Company', 'Blockchain Startup'
+    ];
+    
+    const statuses = ['confirmed', 'pending'];
+    
+    const participants = [];
+    
+    for (let i = 1; i <= 100; i++) {
+      const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+      const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+      const fullName = `${firstName} ${lastName}`;
+      const email = `${firstName.toLowerCase()}.${lastName.toLowerCase()}@email.com`;
+      const phoneNumber = `08${Math.floor(Math.random() * 9000000000) + 1000000000}`;
+      const city = cities[Math.floor(Math.random() * cities.length)];
+      const gender = Math.random() > 0.5 ? 'male' : 'female';
+      const education = educations[Math.floor(Math.random() * educations.length)];
+      const institution = institutions[Math.floor(Math.random() * institutions.length)];
+      const status = statuses[Math.floor(Math.random() * statuses.length)];
+      
+      // Generate random date in the last 30 days
+      const registrationDate = new Date();
+      registrationDate.setDate(registrationDate.getDate() - Math.floor(Math.random() * 30));
+      
+      // Generate random attendance days
+      const allDays = ['day1', 'day2', 'day3', 'day4'];
+      const attendanceDays = allDays.filter(() => Math.random() > 0.3);
+      
+      participants.push({
+        id: i,
+        fullName,
+        email,
+        phoneNumber,
+        city,
+        gender,
+        education,
+        institution,
+        registrationDate: registrationDate.toISOString().split('T')[0],
+        status,
+        attendanceDays
+      });
     }
-  ];
+    
+    return participants;
+  };
+
+  const allParticipants = generateMockParticipants();
 
   // Filter and search participants
   const filteredParticipants = allParticipants
@@ -319,6 +328,32 @@ const AdminParticipants = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
+            {/* Items per page selector */}
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">Tampilkan:</span>
+                <Select value={itemsPerPage.toString()} onValueChange={(value) => {
+                  setItemsPerPage(parseInt(value));
+                  setCurrentPage(1);
+                }}>
+                  <SelectTrigger className="w-20">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="10">10</SelectItem>
+                    <SelectItem value="25">25</SelectItem>
+                    <SelectItem value="50">50</SelectItem>
+                    <SelectItem value="100">100</SelectItem>
+                  </SelectContent>
+                </Select>
+                <span className="text-sm text-muted-foreground">per halaman</span>
+              </div>
+              
+              <div className="text-sm text-muted-foreground">
+                Menampilkan {startIndex + 1}-{Math.min(startIndex + itemsPerPage, filteredParticipants.length)} dari {filteredParticipants.length} peserta
+              </div>
+            </div>
+
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
